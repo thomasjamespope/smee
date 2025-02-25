@@ -182,3 +182,71 @@ def convert_impropers(
     return convert_valence_handlers(
         handlers, "ImproperTorsions", ("k", "periodicity", "phase", "idivf")
     )
+
+@smee.converters.smirnoff_parameter_converter(
+    "LinearBonds", 
+    {
+        "k1": _KCAL_PER_MOL / _ANGSTROM**2, 
+        "k2": _KCAL_PER_MOL / _ANGSTROM**2, 
+        "b1": _ANGSTROM, 
+        "b2": _ANGSTROM
+    }
+)
+def convert_linearized_bonds(
+    handlers: list[openff.interchange.smirnoff.SMIRNOFFBondCollection],
+) -> tuple[smee.TensorPotential, list[smee.ValenceParameterMap]]:
+    return convert_valence_handlers(
+        handlers, "LinearBonds", ("k1", "k2", "b1", "b2")
+    )
+
+@smee.converters.smirnoff_parameter_converter(
+    "LinearAngles", 
+    {
+        "k1": _KCAL_PER_MOL / _RADIANS**2, 
+        "k2": _KCAL_PER_MOL / _RADIANS**2, 
+        "angle1": _RADIANS,
+        "angle2": _RADIANS
+    }
+)
+def convert_linearized_angles(
+    handlers: list[openff.interchange.smirnoff.SMIRNOFFAngleCollection],
+) -> tuple[smee.TensorPotential, list[smee.ValenceParameterMap]]:
+    return convert_valence_handlers(
+        handlers, "LinearAngles", ("k1", "k2", "angle1", "angle2")
+    )
+
+@smee.converters.smirnoff_parameter_converter(
+    "LinearProperTorsions",
+    {
+        "k1": _KCAL_PER_MOL,
+        "k2": _KCAL_PER_MOL,
+        "periodicity": _UNITLESS,
+        "phase1": _RADIANS,
+        "phase2": _RADIANS,
+        "idivf": _UNITLESS,
+    },
+)
+def convert_linearized_propers(
+    handlers: list[openff.interchange.smirnoff.SMIRNOFFProperTorsionCollection],
+) -> tuple[smee.TensorPotential, list[smee.ValenceParameterMap]]:
+    return convert_valence_handlers(
+        handlers, "LinearProperTorsions", ("k1", "k2", "periodicity", "phase1", "phase2", "idivf")
+    )
+
+@smee.converters.smirnoff_parameter_converter(
+    "LinearImproperTorsions",
+    {
+        "k1": _KCAL_PER_MOL,
+        "k2": _KCAL_PER_MOL,
+        "periodicity": _UNITLESS,
+        "phase1": _RADIANS,
+        "phase2": _RADIANS,
+        "idivf": _UNITLESS,
+    },
+)
+def convert_linearized_impropers(
+    handlers: list[openff.interchange.smirnoff.SMIRNOFFProperTorsionCollection],
+) -> tuple[smee.TensorPotential, list[smee.ValenceParameterMap]]:
+    return convert_valence_handlers(
+        handlers, "LinearImproperTorsions", ("k1", "k2", "periodicity", "phase1", "phase2", "idivf")
+    
