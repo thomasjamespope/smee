@@ -32,6 +32,12 @@ class PotentialType(_StrEnum):
     PROPER_TORSIONS = "ProperTorsions"
     IMPROPER_TORSIONS = "ImproperTorsions"
 
+    LINEAR_BONDS = "LinearBonds"
+    LINEAR_ANGLES = "LinearAngles"
+    
+    LINEAR_PROPER_TORSIONS = "LinearProperTorsions"
+    LINEAR_IMPROPER_TORSIONS = "LinearImproperTorsions"
+
     VDW = "vdW"
     ELECTROSTATICS = "Electrostatics"
 
@@ -54,7 +60,12 @@ class EnergyFn(_StrEnum):
     ANGLE_HARMONIC = "k/2*(theta-angle)**2"
 
     TORSION_COSINE = "k*(1+cos(periodicity*theta-phase))"
+    
+    BOND_LINEAR   = "(k1+k2)/2*(r-(k1*length1+k2*length2)/(k1+k2))**2"
 
+    ANGLE_LINEAR   = "(k1+k2)/2*(r-(k1*angle1+k2*angle2)/(k1+k2))**2"
+    
+    TORSION_LINEAR = "(k1+k2)*(1+cos(periodicity*theta-acos((k1-k2)/(k1+k2))))"
 
 CUTOFF_ATTRIBUTE = "cutoff"
 """The attribute that should be used to store the cutoff distance of a potential."""
