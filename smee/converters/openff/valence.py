@@ -249,4 +249,4 @@ def convert_linearized_impropers(
 ) -> tuple[smee.TensorPotential, list[smee.ValenceParameterMap]]:
     return convert_valence_handlers(
         handlers, "LinearImproperTorsions", ("k1", "k2", "periodicity", "phase1", "phase2", "idivf")
-    
+    )
